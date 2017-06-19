@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
    o primeiro é o semaforo
    o segundo 1 ou 0 representa true or false, se pode ou nao usar em outro processo
    o terceiro é o valor inicial do semaforo */
-  sem_init(&mutex, 0, 0);
+  sem_init(&mutex, 0, 1);
 
   // Cada thread usa uma funcao
   pthread_create (&thread1, NULL, (void *) &myfunc1, (void *) msg1);
@@ -42,9 +42,10 @@ void myfunc1 ( void *ptr)// Essa thread escreve
   char *msg = (char *)ptr;
 
   printf("%s\n", msg);
-
-  sprintf(buf, "%s", "Estou no buf");
-//  sleep(1);
+  
+  sem_wait(&mutex);// Trava a thread
+  sprintf(buf, "%s", "Escrito na thread 1");
+  printf("%s\n", buf);
   sem_post(&mutex);// Libera a thread
 
   pthread_exit(0);
@@ -57,8 +58,8 @@ void myfunc2 (void *ptr)// Essa thread le
   printf("%s\n", msg);
 
   sem_wait(&mutex);
+  sprintf(buf, "%s", "Escrito na thread 2");
   printf("%s\n", buf);
-//  sleep(1);
   sem_post(&mutex);
 
   pthread_exit(0);
