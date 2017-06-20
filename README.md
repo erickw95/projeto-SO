@@ -1,6 +1,7 @@
 # projeto-SO
 
 Projeto da disciplina de Sistemas Operacionais UniCEUB 2017/01. Projeto feito na linguagem C para resolver problema de Condição de Corrida utilizando semáforo. (bibliotecas pthread e semaphore)
+Sistema Operacional Fedora 25
 
 - [Erick Weissenstein](https://github.com/erickw95)
 - [Artur Monteiro Paiva](https://github.com/arturmntr)
